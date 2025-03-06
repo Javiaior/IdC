@@ -1,24 +1,53 @@
+import { useEffect, useState } from 'react';
+import { doc, getDoc } from 'firebase/firestore';
+import { db } from '../utils/firebase'; // Import Firebase config
+
 export default function Home() {
+  const [updates, setUpdates] = useState([]);
+
+  useEffect(() => {
+    const fetchUpdates = async () => {
+      try {
+        const docRef = doc(db, "Actualizaciones", "Substack");
+        const docSnap = await getDoc(docRef);
+
+        if (docSnap.exists()) {
+          const updateData = docSnap.data();
+          setUpdates([updateData]); // Assuming you have one document, if there are more, handle accordingly
+        } else {
+          console.log("No such document!");
+        }
+      } catch (error) {
+        console.log("Error fetching data: ", error);
+      }
+    };
+
+    fetchUpdates();
+  }, []);
+
   return (
     <div className="container">
-      <header className="header">
-        <div className="header-content">
-          <img src="https://imgur.com/fOUzY6G.png" alt="Isla del Combate Logo" className="logo" />
-          <div className="text-container">
-            <h1>¿Qué es Isla del Combate?</h1>
-            <p>
-              Isla del Combate es un proyecto cuya misión es promover y fomentar no solo las artes marciales en la isla,
-              sino también sus atletas, competidores y practicantes.
-            </p>
-          </div>
+      <header>
+        <div className="logo-container">
+          <img className="logo" src="https://imgur.com/fOUzY6G.png" alt="Isla del Combate Logo" />
+          <h1>¿Qué es Isla del Combate?</h1>
         </div>
+        <p>
+          Isla del Combate es un proyecto cuya misión es promover y fomentar no solo las artes marciales en la isla,
+          sino también sus atletas, competidores y practicantes.
+        </p>
       </header>
 
       <div className="flex-container">
         <div className="updates-section">
           <h2>Mantente informado</h2>
-          <p>Actualización 1: Nuevos eventos próximos.</p>
-          <p>Actualización 2: Nuevos atletas se unieron al equipo.</p>
+          {updates.slice(0, 3).map((update, index) => (
+            <div key={index} className="update-item">
+              <h3>{update.Title}</h3>
+              <p>{update.Content}</p>
+              <a href={update.Link} target="_blank" rel="noopener noreferrer">Leer más</a>
+            </div>
+          ))}
           <button>Ver más</button>
         </div>
 
