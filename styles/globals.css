@@ -1,46 +1,101 @@
-/* Apply a dark background with modern typography */
+/* Apply a dark background with a linear gradient */
 body {
-    background-color: #121212;
-    color: #e0e0e0;
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
+  background: linear-gradient(135deg, #121212, #1a1a1a);  /* Dark gradient effect */
+  color: #e0e0e0;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  perspective: 1000px; /* Adding perspective for 3D effect */
+}
+
+/* Center content */
+.container {
+  max-width: 900px;
+  margin: 20px auto;
+  padding: 30px;
+}
+
+/* Header with 3D shadow */
+h1 {
+  color: #ff4b4b; /* Red accent */
+  font-size: 3rem;
+  text-align: center;
+  text-transform: uppercase;
+  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.6); /* Add a soft shadow for 3D effect */
+  animation: fadeIn 1s ease-out;
+  animation-delay: 0.3s;
+}
+
+h2 {
+  color: #4b9bff; /* Blue accent */
+  font-size: 1.5rem;
+  margin-top: 20px;
+  text-transform: uppercase;  /* Make headings bold and distinct */
+  text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
+  animation: fadeIn 1s ease-out;
+  animation-delay: 0.5s;
+}
+
+/* Adding 3D effect to sections */
+.section {
+  background-color: #1f1f1f;
+  border-left: 4px solid #ff4b4b;
+  padding-left: 20px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);  /* Soft shadow */
+  transform: rotateX(0deg) rotateY(0deg);
+  transition: all 0.3s ease;
+}
+
+.section:hover {
+  transform: rotateX(5deg) rotateY(5deg); /* Add a 3D rotation effect on hover */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.7); /* Increase the shadow on hover */
+}
+
+/* Adding hover effect for links */
+a {
+  color: #4b9bff;
+  text-decoration: none;
+  transition: all 0.3s ease; /* Smooth transition for hover effects */
+}
+
+a:hover {
+  color: #ff4b4b; /* Change link color on hover */
+  text-decoration: underline;
+}
+
+/* Subtle 3D button styling */
+button {
+  background-color: #ff4b4b;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  transform: translateZ(0);
+}
+
+button:hover {
+  background-color: #e43e3e; /* Darker red on hover */
+  transform: translateY(-3px) translateZ(10px); /* Lift effect */
+}
+
+/* Paragraphs */
+p {
+  line-height: 1.6;  /* More space between lines for better readability */
+  margin-bottom: 15px;
+}
+
+/* Fade-in animation for text */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
   }
-  
-  /* Center content */
-  .container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
-  
-  /* Headers with red and blue highlights */
-  h1 {
-    color: #ff4b4b; /* Red accent */
-    font-size: 2rem;
-    text-align: center;
-  }
-  
-  h2 {
-    color: #4b9bff; /* Blue accent */
-    font-size: 1.5rem;
-    margin-top: 20px;
-  }
-  
-  /* Add subtle section styling */
-  .section {
-    border-left: 4px solid #ff4b4b;
-    padding-left: 10px;
-    margin-bottom: 20px;
-  }
-  
-  /* Links */
-  a {
-    color: #4b9bff;
-    text-decoration: none;
-  }
-  
-  a:hover {
-    text-decoration: underline;
-  }
-  
+}
