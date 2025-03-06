@@ -15,59 +15,58 @@ body {
   padding: 30px;
 }
 
-/* Header with 3D shadow */
+/* Header with flex to center h1 and align logo */
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  text-align: center;
+  margin-bottom: 30px;  /* Space below header */
+}
+
+/* Header content (logo + text) aligned horizontally */
+.header-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;  /* Space between logo and heading */
+  margin-bottom: 20px;  /* Space below header content */
+}
+
+/* Logo on the left */
+.logo {
+  width: 120px;
+  height: auto;
+}
+
+/* Text container for h1 and p */
+.text-container {
+  text-align: left;
+}
+
 h1 {
-  color: #ff4b4b; /* Red accent */
+  color: white; /* White text for header */
   font-size: 3rem;
   text-align: center;
   text-transform: uppercase;
-  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.6); /* Add a soft shadow for 3D effect */
+  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.6); /* Keep the shadow for contrast */
   animation: fadeIn 1s ease-out;
   animation-delay: 0.3s;
 }
 
-h2 {
-  color: #4b9bff; /* Blue accent */
-  font-size: 1.5rem;
+p {
+  color: #A8A8A8; /* Grayish text color for the paragraph */
+  font-size: 1.1rem;
   margin-top: 20px;
-  text-transform: uppercase;  /* Make headings bold and distinct */
-  text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
-  animation: fadeIn 1s ease-out;
-  animation-delay: 0.5s;
-}
-
-/* Adding 3D effect to sections */
-.section {
-  background-color: #1f1f1f;
-  border-left: 4px solid #ff4b4b;
-  padding-left: 20px;
+  line-height: 1.6;
   margin-bottom: 20px;
-  border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);  /* Soft shadow */
-  transform: rotateX(0deg) rotateY(0deg);
-  transition: all 0.3s ease;
-}
-
-.section:hover {
-  transform: rotateX(5deg) rotateY(5deg); /* Add a 3D rotation effect on hover */
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.7); /* Increase the shadow on hover */
-}
-
-/* Adding hover effect for links */
-a {
-  color: #4b9bff;
-  text-decoration: none;
-  transition: all 0.3s ease; /* Smooth transition for hover effects */
-}
-
-a:hover {
-  color: #ff4b4b; /* Change link color on hover */
-  text-decoration: underline;
 }
 
 /* Subtle 3D button styling */
 button {
-  background-color: #ff4b4b;
+  background-color: #A8A8A8; /* Gray button color */
   color: white;
   padding: 10px 20px;
   border: none;
@@ -78,14 +77,36 @@ button {
 }
 
 button:hover {
-  background-color: #e43e3e; /* Darker red on hover */
+  background-color: #888888; /* Slightly darker gray on hover */
   transform: translateY(-3px) translateZ(10px); /* Lift effect */
 }
 
-/* Paragraphs */
-p {
-  line-height: 1.6;  /* More space between lines for better readability */
-  margin-bottom: 15px;
+/* Flex container to align "Updates" and "Cómo intentamos hacerlo" */
+.flex-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-top: 30px;
+}
+
+/* Updates Section (on the left) */
+.updates-section {
+  flex: 1;
+  margin-right: 20px; /* Space between the updates and the other content */
+  background-color: #333;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+/* "Cómo intentamos hacerlo" content */
+.como-intentamos {
+  flex: 2;
+}
+
+/* Adding extra margin for sections within "Cómo intentamos hacerlo" */
+.como-intentamos .section {
+  margin-bottom: 25px;
 }
 
 /* Fade-in animation for text */
