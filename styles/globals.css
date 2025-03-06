@@ -1,0 +1,46 @@
+/* Apply a dark background with modern typography */
+body {
+    background-color: #121212;
+    color: #e0e0e0;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Center content */
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  /* Headers with red and blue highlights */
+  h1 {
+    color: #ff4b4b; /* Red accent */
+    font-size: 2rem;
+    text-align: center;
+  }
+  
+  h2 {
+    color: #4b9bff; /* Blue accent */
+    font-size: 1.5rem;
+    margin-top: 20px;
+  }
+  
+  /* Add subtle section styling */
+  .section {
+    border-left: 4px solid #ff4b4b;
+    padding-left: 10px;
+    margin-bottom: 20px;
+  }
+  
+  /* Links */
+  a {
+    color: #4b9bff;
+    text-decoration: none;
+  }
+  
+  a:hover {
+    text-decoration: underline;
+  }
+  
