@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { doc, getDoc } from 'firebase/firestore';
 import { db } from '../utils/firebase'; // Import Firebase config
+import Link from 'next/link'; // Import the Link component
 
 export default function Home() {
   const [updates, setUpdates] = useState([]);
@@ -48,7 +49,11 @@ export default function Home() {
               <a href={update.Link} target="_blank" rel="noopener noreferrer">Leer más</a>
             </div>
           ))}
-          <button>Ver más</button>
+          
+          {/* Use Link to navigate to the updates page */}
+          <Link href="/updates">
+            <button>Ver más</button>
+          </Link>
         </div>
 
         <div className="como-intentamos">
