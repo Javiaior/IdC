@@ -1,39 +1,100 @@
-const functions = require("firebase-functions");
-const admin = require("firebase-admin");
-const Parser = require("rss-parser");
+// pages/index.js
+import Navbar from '../components/Navbar'; // Import the Navbar component
+import { useEffect, useState } from 'react';
+import { doc, getDoc } from 'firebase/firestore';
+import { db } from '../utils/firebase'; // Import Firebase config
 
-admin.initializeApp();
-const db = admin.firestore();
-const parser = new Parser();
+export default function Home() {
+  const [updates, setUpdates] = useState([]);
 
-const SUBSTACK_FEED_URL =
-  "https://isladelcombate.substack.com/feed"; // Break into new line
-
-exports.fetchSubstackPosts = functions.pubsub
-    .schedule("every 30 minutes") // Break into new line
-    .onRun(async () => {
+  useEffect(() => {
+    const fetchUpdates = async () => {
       try {
-        const feed = await parser.parseURL(SUBSTACK_FEED_URL);
-        const batch = db.batch();
+        const docRef = doc(db, "Actualizaciones", "Substack");
+        const docSnap = await getDoc(docRef);
 
-        for (const item of feed.items) {
-          const postRef = db.collection("Actualizaciones")
-              .doc(item.guid); // Break into new line
-
-          const postDoc = await postRef.get();
-          if (!postDoc.exists) {
-            batch.set(postRef, {
-              title: item.title,
-              content: item.contentSnippet || item.content,
-              link: item.link,
-              publishedAt: new Date(item.pubDate),
-            }); // ✅ Add missing comma
-          }
+        if (docSnap.exists()) {
+          const updateData = docSnap.data();
+          setUpdates([updateData]); // Assuming you have one document, if there are more, handle accordingly
+        } else {
+          console.log("No such document!");
         }
-
-        await batch.commit();
-        console.log("✅ Substack posts updated in Firebase!");
       } catch (error) {
-        console.error("❌ Error fetching Substack feed:", error);
+        console.log("Error fetching data: ", error);
       }
-    });
+    };
+
+    fetchUpdates();
+  }, []);
+
+  return (
+    <div className="container">
+      <Navbar /> {/* Add the navbar component here */}
+
+      <header>
+        <div className="logo-container">
+          <img className="logo" src="https://imgur.com/fOUzY6G.png" alt="Isla del Combate Logo" />
+          <h1>¿Qué es Isla del Combate?</h1>
+        </div>
+        <p>
+          Isla del Combate es un proyecto cuya misión es promover y fomentar no solo las artes marciales en la isla,
+          sino también sus atletas, competidores y practicantes.
+        </p>
+      </header>
+
+      <div className="flex-container">
+        <div className="updates-section">
+          <h2>Mantente informado</h2>
+          {updates.slice(0, 3).map((update, index) => (
+            <div key={index} className="update-item">
+              <h3>{update.Title}</h3>
+              <p>{update.Content}</p>
+              <a href={update.Link} target="_blank" rel="noopener noreferrer">Leer más</a>
+            </div>
+          ))}
+          <button onClick={() => window.location.href = "/updates"}>Ver más</button>
+        </div>
+
+        <div className="como-intentamos">
+          <h2>¿Cómo intentamos hacerlo?</h2>
+
+          <div className="section">
+            <h2>Apoyo a atletas</h2>
+            <p>
+              Existen muchos atletas y practicantes en la isla que compiten dentro y fuera de la isla.
+              Buscamos apoyarlos en cualquier manera que podamos.
+            </p>
+          </div>
+
+          <div className="section">
+            <h2>Apoyo a eventos</h2>
+            <p>
+              Cuando aparece una oportunidad de estar en un evento en la isla, decimos presente.
+              Sea ayudando, grabando, tomando fotos, auspiciando o como espectadores, buscamos
+              apoyar a los eventos y sus organizadores.
+            </p>
+          </div>
+
+          <div className="section">
+            <h2>Educación</h2>
+            <p>
+              A través de análisis de técnica y estrategias, asistiendo a seminarios y visitas,
+              y apoyando eventos de compartir y aprendizaje entre atletas en la isla,
+              buscamos alimentar el conocimiento de los practicantes, aumentando el conocimiento colectivo de la comunidad.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* Social Media Links */}
+      <div className="social-media-container">
+        <h2>Follow Us</h2>
+        <div className="social-media-icons">
+          <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer">
+            <img src="/facebook-icon.png" alt="Facebook" className="social-icon" />
+          </a>
+        </div>
+      </div>
+    </div>
+  );
+}

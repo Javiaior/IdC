@@ -215,3 +215,36 @@ button:hover {
     transform: translateY(0);
   }
 }
+
+/* Social Media Section */
+.social-media-container {
+  text-align: center;
+  margin-top: 50px;
+}
+
+.social-media-container h2 {
+  color: white;
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.social-media-icons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.social-icon {
+  width: 40px;
+  height: 40px;
+  transition: transform 0.3s ease;
+}
+
+.social-icon:hover {
+  transform: scale(1.1);
+}
+
+/* Optional: Add padding to bottom */
+body {
+  padding-bottom: 60px; /* Ensure there's space for the icons */
+}
