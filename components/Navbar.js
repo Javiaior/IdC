@@ -20,16 +20,13 @@ export default function Navbar() {
               <Link href="/">Home</Link>
             </li>
             <li>
-              <Link href="/updates">Updates</Link>
+              <Link href="/updates">Actualizaciones</Link>
             </li>
             <li>
-              <Link href="/athletes">Athletes</Link>
+              <Link href="/athletes">Atletas</Link>
             </li>
             <li>
-              <Link href="/events">Events</Link>
-            </li>
-            <li>
-              <Link href="/contact">Contact</Link>
+              <Link href="/events">Eventos</Link>
             </li>
           </ul>
         </div>
