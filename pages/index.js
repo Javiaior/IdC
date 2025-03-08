@@ -85,6 +85,16 @@ export default function Home() {
           </div>
         </div>
       </div>
+
+      {/* Social Media Links */}
+      <div className="social-media-container">
+        <h2>Encuéntranos</h2>
+        <div className="social-media-icons">
+          <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer">
+            <img src="/images/facebook-icon.png" alt="Facebook" className="social-icon" />
+          </a>
+        </div>
+      </div>
     </div>
   );
 }
