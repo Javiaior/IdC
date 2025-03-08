@@ -1,7 +1,8 @@
+// pages/index.js
+import Navbar from '../components/Navbar'; // Import the Navbar component
 import { useEffect, useState } from 'react';
 import { doc, getDoc } from 'firebase/firestore';
 import { db } from '../utils/firebase'; // Import Firebase config
-import Link from 'next/link'; // Import the Link component
 
 export default function Home() {
   const [updates, setUpdates] = useState([]);
@@ -28,6 +29,8 @@ export default function Home() {
 
   return (
     <div className="container">
+      <Navbar /> {/* Add the navbar component here */}
+
       <header>
         <div className="logo-container">
           <img className="logo" src="https://imgur.com/fOUzY6G.png" alt="Isla del Combate Logo" />
@@ -49,11 +52,7 @@ export default function Home() {
               <a href={update.Link} target="_blank" rel="noopener noreferrer">Leer más</a>
             </div>
           ))}
-          
-          {/* Use Link to navigate to the updates page */}
-          <Link href="/updates">
-            <button>Ver más</button>
-          </Link>
+          <button onClick={() => window.location.href = "/updates"}>Ver más</button>
         </div>
 
         <div className="como-intentamos">
