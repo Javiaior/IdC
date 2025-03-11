@@ -1,8 +1,8 @@
 // pages/updates.js
+import Navbar from '../components/Navbar'; // Import the Navbar component
 import { useEffect, useState } from 'react';
 import { collection, getDocs } from 'firebase/firestore';
-import { db } from '../utils/firebase'; // Firebase config
-import Navbar from '../components/Navbar'; // Import Navbar
+import { db } from '../utils/firebase'; // Import Firebase config
 
 export default function Updates() {
   const [updates, setUpdates] = useState([]);
@@ -11,11 +11,8 @@ export default function Updates() {
     const fetchUpdates = async () => {
       try {
         const querySnapshot = await getDocs(collection(db, "Actualizaciones"));
-        const updatesList = querySnapshot.docs.map(doc => ({
-          id: doc.id,
-          ...doc.data()
-        }));
-        setUpdates(updatesList);
+        const updatesArray = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        setUpdates(updatesArray);
       } catch (error) {
         console.log("Error fetching updates: ", error);
       }
@@ -26,25 +23,16 @@ export default function Updates() {
 
   return (
     <div className="container">
-      <Navbar /> {/* Navbar added here */}
+      <Navbar /> {/* Add the navbar component here */}
       <h1>Actualizaciones</h1>
-
       <div className="updates-list">
-        {updates.length > 0 ? (
-          updates.map((update) => (
-            <div key={update.id} className="update-item">
-              <h2>{update.Title}</h2>
-              <p>{update.Content}</p>
-              {update.Link && (
-                <a href={update.Link} target="_blank" rel="noopener noreferrer">
-                  Leer más
-                </a>
-              )}
-            </div>
-          ))
-        ) : (
-          <p>No hay actualizaciones disponibles.</p>
-        )}
+        {updates.map((update) => (
+          <div key={update.id} className="update-item">
+            <h3>{update.Title}</h3>
+            <p>{update.Content}</p>
+            {update.Link && <a href={update.Link} target="_blank" rel="noopener noreferrer">Leer más</a>}
+          </div>
+        ))}
       </div>
     </div>
   );
