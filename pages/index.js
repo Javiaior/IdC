@@ -33,7 +33,6 @@ export default function Home() {
 
       <header>
         <div className="logo-container">
-          <img className="logo" src="https://imgur.com/fOUzY6G.png" alt="Isla del Combate Logo" />
           <h1>¿Qué es Isla del Combate?</h1>
         </div>
         <p>
