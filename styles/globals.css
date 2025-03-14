@@ -39,7 +39,8 @@ body {
 
 .links-container {
   display: flex;
-  justify-content: flex-end;
+  /* justify-content: flex-end; Eliminar o cambiar a flex-start */
+  margin-right: 200px; /* Ajusta este valor según sea necesario */
 }
 
 .nav-links {
