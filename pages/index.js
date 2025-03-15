@@ -97,10 +97,10 @@ export default function Home() {
           <a href="https://www.facebook.com/groups/914374252473778" target="_blank" rel="noopener noreferrer">
             <img src="/images/facebook-icon-2.png" alt="Facebook Group" className="social-icon" />
           </a>
-          <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">
+          <a href="https://www.instagram.com/isladelcombate/" target="_blank" rel="noopener noreferrer">
             <img src="/images/instagram-icon.png" alt="Instagram" className="social-icon" />
           </a>
-          <a href="https://www.youtube.com" target="_blank" rel="noopener noreferrer">
+          <a href="https://www.youtube.com/@isladelcombate" target="_blank" rel="noopener noreferrer">
             <img src="/images/youtube-icon.png" alt="YouTube" className="social-icon" />
           </a>
         </div>

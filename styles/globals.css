@@ -257,3 +257,48 @@ button:hover {
 body {
   padding-bottom: 60px; /* Ensure there's space for the icons */
 }
+
+/* Estilos de Eventos */
+.event-item {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 20px;
+}
+
+.event-details {
+  flex: 1;
+}
+
+.event-details h2 {
+  font-size: 2.0em;
+  margin-top: 0;
+  font-weight: bold;
+}
+
+.event-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.event-location-time {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.event-date,
+.event-location,
+.event-time {
+  margin: 0;
+}
+
+.event-container {
+  border: 1px solid #444; /* Agrega un borde */
+  border-radius: 8px; /* Agrega bordes redondeados */
+  padding: 20px; /* Agrega relleno interno */
+  margin-bottom: 20px; /* Agrega margen inferior */
+  background-color: #333; /* Agrega un color de fondo */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Agrega una sombra */
+}

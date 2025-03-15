@@ -2,7 +2,8 @@
 import { useEffect, useState } from 'react';
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../utils/firebase';
-import Navbar from '../components/Navbar'; // Import Navbar
+import Navbar from '../components/Navbar';
+import Link from 'next/link'; // Importa el componente Link de Next.js
 
 export default function Athletes() {
   const [athletes, setAthletes] = useState([]);
@@ -26,16 +27,17 @@ export default function Athletes() {
 
   return (
     <div className="container">
-      <Navbar /> {/* Navbar added here */}
+      <Navbar />
       <h1>Atletas</h1>
-      <p>Conoce a los atletas que forman parte de Isla del Combate.</p>
 
       <div className="athletes-list">
         {athletes.length > 0 ? (
           athletes.map((athlete) => (
             <div key={athlete.id} className="athlete-item">
-              <h2>{athlete.Name}</h2>
-              <p>{athlete.Bio}</p>
+              <Link href={`/atletas/${athlete.id}`}>
+                <img src={athlete.Imagen} alt={athlete.Nombre} />
+                <h2>{athlete.Nombre}</h2>
+              </Link>
             </div>
           ))
         ) : (
