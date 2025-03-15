@@ -22,9 +22,9 @@ export default function Home() {
           ...doc.data(),
         }));
         setUpdates(updatesList);
-        console.log('Datos de Firebase:', updatesList); // Agregado para depuración
+        console.log('Datos de Firebase:', updatesList);
       } catch (error) {
-        console.error('Error fetching data: ', error); // Cambiado a console.error
+        console.error('Error fetching data: ', error);
       }
     };
 
@@ -48,14 +48,13 @@ export default function Home() {
       <div className="flex-container">
         <div className="updates-section">
           <h2>Mantente informado</h2>
-          {updates.map((update) => ( // Eliminado .slice(0, 3) para depurar
+          {updates.map((update) => (
             <div key={update.id} className="update-item">
               <h3>{update.Title}</h3>
-              <p>{update.Content}</p>
-              <a href={update.Link} target="_blank" rel="noopener noreferrer">Leer más</a>
+              <p>{update.Content.substring(0, 150)}...</p>
             </div>
           ))}
-          <button onClick={() => window.location.href = "/updates"}>Ver más</button>
+          <button onClick={() => window.open("https://isladelcombate.substack.com/", "_blank")}>Ver más</button>
         </div>
 
         <div className="como-intentamos">

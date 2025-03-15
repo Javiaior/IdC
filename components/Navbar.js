@@ -28,9 +28,6 @@ export default function Navbar() {
               <Link href="/">Home</Link>
             </li>
             <li>
-              <Link href="/updates">Actualizaciones</Link>
-            </li>
-            <li>
               <Link href="/athletes">Atletas</Link>
             </li>
             <li>

@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react';
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../utils/firebase';
-import Navbar from '../components/Navbar'; // Import Navbar
+import Navbar from '../components/Navbar';
 
 export default function Events() {
   const [events, setEvents] = useState([]);
@@ -10,14 +10,14 @@ export default function Events() {
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        const querySnapshot = await getDocs(collection(db, "Eventos"));
-        const eventsList = querySnapshot.docs.map(doc => ({
+        const querySnapshot = await getDocs(collection(db, 'Eventos'));
+        const eventsList = querySnapshot.docs.map((doc) => ({
           id: doc.id,
-          ...doc.data()
+          ...doc.data(),
         }));
         setEvents(eventsList);
       } catch (error) {
-        console.log("Error fetching events: ", error);
+        console.error('Error fetching events: ', error);
       }
     };
 
@@ -26,26 +26,34 @@ export default function Events() {
 
   return (
     <div className="container">
-      <Navbar /> {/* Navbar added here */}
+      <Navbar />
       <h1>Eventos</h1>
-      <p>Explora los próximos eventos y resultados pasados.</p>
 
       <div className="events-list">
-        {events.length > 0 ? (
-          events.map((event) => (
-            <div key={event.id} className="event-item">
-              <h2>{event.Title}</h2>
-              <p>{event.Description}</p>
+        {events.map((event) => (
+          <div key={event.id} className="event-item">
+            {event.Image && (
+              <img src={event.Image} alt={event.Name} className="event-image" />
+            )}
+            <div className="event-details">
+              <h2>{event.Name}</h2>
+              <p>
+                {event.Dia}/{event.Mes}/{event.Año} - {event.Hora}
+              </p>
+              {event.Localizacion && <p>Localización: {event.Localizacion}</p>}
               {event.Link && (
                 <a href={event.Link} target="_blank" rel="noopener noreferrer">
                   Más información
                 </a>
               )}
+              {event.Resultados && ( // Mostrar el botón solo si hay resultados
+                <button onClick={() => alert('Mostrar resultados')}>
+                  Ver resultados
+                </button>
+              )}
             </div>
-          ))
-        ) : (
-          <p>No hay eventos disponibles.</p>
-        )}
+          </div>
+        ))}
       </div>
     </div>
   );
