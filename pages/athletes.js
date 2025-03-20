@@ -1,9 +1,9 @@
 // pages/athletes.js
 import { useEffect, useState } from 'react';
-import { collection, getDocs } from 'firebase/firestore';
+import { collection, getDocs, orderBy, query } from 'firebase/firestore';
 import { db } from '../utils/firebase';
 import Navbar from '../components/Navbar';
-import Link from 'next/link'; // Importa el componente Link de Next.js
+import Link from 'next/link';
 
 export default function Athletes() {
   const [athletes, setAthletes] = useState([]);
@@ -11,14 +11,16 @@ export default function Athletes() {
   useEffect(() => {
     const fetchAthletes = async () => {
       try {
-        const querySnapshot = await getDocs(collection(db, "Atletas"));
-        const athletesList = querySnapshot.docs.map(doc => ({
+        const athletesQuery = query(collection(db, 'Atletas'), orderBy('Nombre'));
+        const querySnapshot = await getDocs(athletesQuery);
+        const athletesList = querySnapshot.docs.map((doc) => ({
           id: doc.id,
-          ...doc.data()
+          ...doc.data(),
         }));
+        console.log('Athletes List:', athletesList);
         setAthletes(athletesList);
       } catch (error) {
-        console.log("Error fetching athletes: ", error);
+        console.log('Error fetching athletes: ', error);
       }
     };
 
@@ -31,18 +33,13 @@ export default function Athletes() {
       <h1>Atletas</h1>
 
       <div className="athletes-list">
-        {athletes.length > 0 ? (
-          athletes.map((athlete) => (
-            <div key={athlete.id} className="athlete-item">
-              <Link href={`/atletas/${athlete.id}`}>
-                <img src={athlete.Imagen} alt={athlete.Nombre} />
-                <h2>{athlete.Nombre}</h2>
-              </Link>
-            </div>
-          ))
-        ) : (
-          <p>No hay atletas disponibles.</p>
-        )}
+        <ul>
+          {athletes.map((athlete) => (
+      <ul key={athlete.id} className="athlete-name"> {/* Clase CSS */}
+      <Link href={`/atletas/${athlete.id}`}>{athlete.Nombre}</Link>
+      </ul>
+          ))}
+        </ul>
       </div>
     </div>
   );

@@ -1,15 +1,18 @@
 // pages/resultados/[id].js
 import { useEffect, useState } from 'react';
-import { collection, getDocs, doc, getDoc } from 'firebase/firestore';
+import { doc, getDoc } from 'firebase/firestore';
 import { db } from '../../utils/firebase';
 import { useRouter } from 'next/router';
 import Navbar from '../../components/Navbar';
+import Link from 'next/link';
 
 export default function Resultados() {
   const router = useRouter();
   const { id } = router.query;
   const [resultados, setResultados] = useState([]);
   const [eventName, setEventName] = useState('');
+  const [ganadores, setGanadores] = useState({});
+  const [perdedores, setPerdedores] = useState({});
 
   useEffect(() => {
     const fetchResultados = async () => {
@@ -18,12 +21,39 @@ export default function Resultados() {
           const eventRef = doc(db, 'Eventos', id);
           const eventSnap = await getDoc(eventRef);
           if (eventSnap.exists()) {
-            setEventName(eventSnap.data().Name);
-          }
+            setEventName(eventSnap.data().name);
 
-          const resultadosSnapshot = await getDocs(collection(db, 'Eventos', id, 'Resultados'));
-          const resultadosList = resultadosSnapshot.docs.map((doc) => doc.data());
-          setResultados(resultadosList);
+            // Obtener resultados del campo de array
+            const resultadosList = eventSnap.data().Resultados || [];
+            setResultados(resultadosList);
+
+            // Obtener nombres de ganadores y perdedores
+            const ganadoresPromises = resultadosList.map(async (resultado) => {
+              try {
+                const ganadorDoc = await getDoc(doc(db, 'Atletas', resultado.Ganador));
+                return { [resultado.Ganador]: ganadorDoc.exists() ? ganadorDoc.data().Nombre : 'Atleta Desconocido' };
+              } catch (error) {
+                console.error('Error fetching ganador:', error);
+                return { [resultado.Ganador]: 'Error' };
+              }
+            });
+
+            const perdedoresPromises = resultadosList.map(async (resultado) => {
+              try {
+                const perdedorDoc = await getDoc(doc(db, 'Atletas', resultado.Perdedor));
+                return { [resultado.Perdedor]: perdedorDoc.exists() ? perdedorDoc.data().Nombre : 'Atleta Desconocido' };
+              } catch (error) {
+                console.error('Error fetching perdedor:', error);
+                return { [resultado.Perdedor]: 'Error' };
+              }
+            });
+
+            const ganadoresData = await Promise.all(ganadoresPromises);
+            const perdedoresData = await Promise.all(perdedoresPromises);
+
+            setGanadores(Object.assign({}, ...ganadoresData));
+            setPerdedores(Object.assign({}, ...perdedoresData));
+          }
         } catch (error) {
           console.error('Error fetching resultados: ', error);
         }
@@ -41,7 +71,13 @@ export default function Resultados() {
         <ul>
           {resultados.map((resultado, index) => (
             <li key={index}>
-              {resultado.Ganador} venció a {resultado.Perdedor}
+              <Link href={`/atletas/${resultado.Ganador}`}>
+                {ganadores[resultado.Ganador] || 'Cargando...'}
+              </Link>
+              {' venció a '}
+              <Link href={`/atletas/${resultado.Perdedor}`}>
+                {perdedores[resultado.Perdedor] || 'Cargando...'}
+              </Link>
             </li>
           ))}
         </ul>
@@ -53,6 +89,4 @@ export default function Resultados() {
       </p>
     </div>
   );
-  
 }
-
