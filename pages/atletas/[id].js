@@ -24,6 +24,7 @@ export default function Athlete() {
           if (athleteDoc.exists()) {
             const athleteData = { id: athleteDoc.id, ...athleteDoc.data() };
             setAthlete(athleteData);
+            console.log('Datos del atleta:', athleteData);
 
             if (Array.isArray(athleteData.Resultados)) {
               const eventosPromises = athleteData.Resultados.map(async (resultado) => {
@@ -69,6 +70,7 @@ export default function Athlete() {
 
               const eventosData = (await Promise.all(eventosPromises)).filter(Boolean);
               setEventos(eventosData);
+              console.log('Eventos obtenidos:', eventosData);
 
               let victorias = 0;
               let derrotas = 0;
@@ -97,7 +99,7 @@ export default function Athlete() {
 
   if (!athlete) {
     return (
-      <div>
+      <div className="container">
         <Navbar />
         <p>Cargando...</p>
       </div>
@@ -105,19 +107,19 @@ export default function Athlete() {
   }
 
   return (
-    <div>
+    <div className="container">
       <Navbar />
-      <h1 style={{ textAlign: 'center' }}>{athlete.Nombre}</h1>
+      <h1 className="athlete-title">{athlete.Nombre}</h1>
 
       {athlete.victorias !== undefined && athlete.derrotas !== undefined && (
-        <div style={{ textAlign: 'center' }}>
+        <div className="athlete-record">
           Record IdC: ({athlete.victorias} - {athlete.derrotas})
         </div>
       )}
 
       {athlete.Instagram && (
-        <div style={{ textAlign: 'center' }}>
-          <span style={{ display: 'inline-flex', alignItems: 'center', marginBottom: '10px' }}>
+        <div className="athlete-instagram">
+          <span className="instagram-link">
             Instagram: <a href={athlete.Instagram} target="_blank" rel="noopener noreferrer">
               <Image src="/images/instagram-icon.png" alt="Perfil de Instagram" width={32} height={32} />
             </a>
@@ -125,32 +127,33 @@ export default function Athlete() {
         </div>
       )}
 
-      {athlete.Imagen && <img src={athlete.Imagen} alt={athlete.Nombre} />}
+      {athlete.Imagen && <img src={athlete.Imagen} alt={athlete.Nombre} className="athlete-image" />}
 
       {console.log('athlete.Instagram:', athlete.Instagram)}
 
-      <h2>Historial de Eventos</h2>
-      <div style={{ overflowX: 'auto' }}>
-        <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+      <h2 className="event-history-title">Historial de Eventos</h2>
+      <div className="event-table-container">
+        <table className="event-table">
           <thead>
             <tr>
-              <th style={{ border: '1px solid black', padding: '8px', textAlign: 'left' }}>Fecha</th>
-              <th style={{ border: '1px solid black', padding: '8px', textAlign: 'left' }}>Evento</th>
-              <th style={{ border: '1px solid black', padding: '8px', textAlign: 'left' }}>Resultado</th>
-              <th style={{ border: '1px solid black', padding: '8px', textAlign: 'left' }}>Oponente</th>
+              <th className="table-header">Fecha</th>
+              <th className="table-header">Evento</th>
+              <th className="table-header">Resultado</th>
+              <th className="table-header">Oponente</th>
             </tr>
           </thead>
           <tbody>
             {eventos.map((evento) => {
+              console.log('Evento:', evento);
               const fecha = new Date(evento.Año, evento.Mes - 1, evento.Dia);
               const fechaFormateada = `${fecha.getDate().toString().padStart(2, '0')}/${(fecha.getMonth() + 1).toString().padStart(2, '0')}/${fecha.getFullYear()}`;
 
               return (
                 <tr key={evento.id}>
-                  <td style={{ border: '1px solid black', padding: '8px' }}>{fechaFormateada}</td>
-                  <td style={{ border: '1px solid black', padding: '8px' }}>{evento.Name}</td>
-                  <td style={{ border: '1px solid black', padding: '8px' }}>{evento.Resultado}</td>
-                  <td style={{ border: '1px solid black', padding: '8px' }}>{evento.Oponente}</td>
+                  <td className="table-cell">{fechaFormateada}</td>
+                  <td className="table-cell">{evento.Name}</td>
+                  <td className="table-cell">{evento.Resultado}</td>
+                  <td className="table-cell">{evento.Oponente}</td>
                 </tr>
               );
             })}

@@ -307,3 +307,43 @@ body {
   font-size: 20px;
   color:white;
 }
+
+.container {
+  max-width: 1200px; /* Aumenta el ancho máximo */
+  margin: 20px auto;
+  padding: 30px;
+}
+
+.event-table-container {
+  overflow-x: auto;
+  margin: 20px; /* Añade márgenes */
+}
+
+
+.athlete-details-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Divide el espacio en dos columnas iguales */
+  gap: 20px; /* Añade espacio entre las columnas */
+}
+
+.athlete-record {
+  text-align: center; /* Centra el texto */
+  margin-bottom: 15px;
+}
+
+.athlete-instagram {
+  text-align: center; /* Centra el texto */
+  margin-bottom: 15px;
+}
+
+.table-header,
+.table-cell {
+  border: 1px solid black;
+  padding: 12px; /* Aumenta el padding */
+  text-align: left;
+}
+
+.event-table {
+  width: 100%; /* Asegura que la tabla ocupe todo el ancho disponible */
+  border-collapse: collapse;
+}
