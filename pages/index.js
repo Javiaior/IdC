@@ -100,9 +100,6 @@ export default function Home() {
             <img src="/images/facebook-icon-2.png" alt="Facebook Group" className="social-icon" />
           </a>
 
-          {/* Instagram Icon */}
-          <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">
-            <img src="/images/instagram-icon.png" alt="Instagram" className="social-icon" />
           </a>
 
 
