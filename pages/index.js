@@ -105,9 +105,7 @@ export default function Home() {
             <img src="/images/instagram-icon.png" alt="Instagram" className="social-icon" />
           </a>
 
-          {/* YouTube Icon */}
-          <a href="https://www.youtube.com" target="_blank" rel="noopener noreferrer">
-            <img src="/images/youtube-icon.png" alt="YouTube" className="social-icon" />
+
           </a>
         </div>
       </div>
