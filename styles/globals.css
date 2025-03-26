@@ -1,250 +1,294 @@
-/* Apply a dark background with a linear gradient */
-body {
-  background: linear-gradient(135deg, #121212, #1a1a1a);  /* Dark gradient effect */
-  color: #e0e0e0;
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  perspective: 1000px; /* Adding perspective for 3D effect */
-}
+/* globals.css */
 
-/* Center content */
-.container {
-  max-width: 900px;
-  margin: 20px auto;
-  padding: 30px;
-}
+    /* Aplica un fondo oscuro con un degradado lineal */
+    body {
+      background: linear-gradient(135deg, #121212, #1a1a1a);
+      color: #e0e0e0;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      perspective: 1000px;
+    }
 
-/* Navbar Styles */
-.navbar {
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-  background-color: #121212; /* Dark background for the navbar */
-  padding: 10px 20px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5); /* Slight shadow for better visibility */
-}
+    /* Centra el contenido */
+    .container {
+      max-width: 1200px; /* Aumenta el ancho máximo */
+      margin: 20px auto;
+      padding: 30px;
+    }
 
-.navbar-content {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
+    /* Estilos de la barra de navegación */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background-color: #121212;
+      padding: 10px 20px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    }
 
-.links-container {
-  display: flex;
-  justify-content: flex-end;
-}
+    .navbar-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
 
-.nav-links {
-  list-style: none;
-  display: flex;
-  gap: 20px;
-}
+    .navbar-logo {
+      width: 100px;
+      height: auto;
+      margin-right: 20px;
+    }
 
-.nav-links li {
-  font-size: 1.1rem;
-}
+    .links-container {
+      display: flex;
+      margin-right: 400px;
+    }
 
-.nav-links a {
-  color: #e0e0e0;
-  text-decoration: none;
-  padding: 5px 10px;
-  transition: all 0.3s ease;
-}
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+    }
 
-.nav-links a:hover {
-  background-color: #333;
-  border-radius: 5px;
-}
+    .nav-links li {
+      font-size: 1.1rem;
+    }
 
-/* Hamburger Menu */
-.hamburger {
-  display: none;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  width: 30px;
-  height: 25px;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-}
+    .nav-links a {
+      color: #e0e0e0;
+      text-decoration: none;
+      padding: 5px 10px;
+      transition: all 0.3s ease;
+    }
 
-.hamburger .bar {
-  width: 100%;
-  height: 4px;
-  background-color: #e0e0e0;
-}
+    .nav-links a:hover {
+      background-color: #333;
+      border-radius: 5px;
+    }
 
-/* Mobile View */
-@media (max-width: 768px) {
-  .navbar-content {
-    flex-direction: column;
-    align-items: flex-start;
-  }
+    /* Menú hamburguesa */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      width: 30px;
+      height: 25px;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+    }
 
-  .links-container {
-    width: 100%;
-    display: none;
-    flex-direction: column;
-    gap: 10px;
-    margin-top: 10px;
-  }
+    .hamburger .bar {
+      width: 100%;
+      height: 4px;
+      background-color: #e0e0e0;
+    }
 
-  .links-container.open {
-    display: flex;
-  }
+    /* Vista móvil */
+    @media (max-width: 768px) {
+      .navbar-content {
+        flex-direction: row;
+        align-items: center;
+      }
 
-  .nav-links {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    padding: 10px;
-    gap: 10px;
-  }
+      .links-container {
+        width: 100%;
+        display: none;
+        flex-direction: column;
+        gap: 10px;
+        margin-top: 50px;
+      }
 
-  .nav-links li {
-    text-align: left;
-    width: 100%;
-  }
+      .links-container.open {
+        display: flex;
+      }
 
-  .hamburger {
-    display: flex;
-  }
-}
+      .nav-links {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        padding: 10px;
+        gap: 10px;
+      }
 
-/* Header content */
-.header {
-  display: flex;
-  justify-content: center;  /* Center the items horizontally */
-  align-items: center;  /* Center the items vertically */
-  margin-bottom: 30px;  /* Space below header */
-}
+      .nav-links li {
+        text-align: left;
+        width: 100%;
+      }
 
-/* Header content (logo + text) aligned horizontally */
-.header-content {
-  display: flex;
-  align-items: center;  /* Center the items vertically */
-  gap: 10px;  /* Space between logo and heading */
-}
+      .hamburger {
+        display: flex;
+        position: absolute;
+        right: 20px;
+      }
+    }
 
-/* Logo size adjustment */
-.logo {
-  width: 80px;  /* Reduced logo size */
-  height: auto;
-  margin-right: 10px; /* Space between logo and heading */
-}
+    /* Contenido del encabezado */
+    .header {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 30px;
+    }
 
-/* Text container for h1 and p */
-.text-container {
-  text-align: left;
-}
+    .header-content {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
 
-h1 {
-  color: white; /* White text for header */
-  font-size: 3rem;
-  text-align: center;
-  text-transform: uppercase;
-  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.6); /* Keep the shadow for contrast */
-  animation: fadeIn 1s ease-out;
-  animation-delay: 0.3s;
-}
+    .logo {
+      width: 80px;
+      height: auto;
+      margin-right: 10px;
+    }
 
-p {
-  color: #A8A8A8; /* Grayish text color for the paragraph */
-  font-size: 1.1rem;
-  margin-top: 20px;
-  line-height: 1.6;
-  margin-bottom: 20px;
-}
+    .text-container {
+      text-align: left;
+    }
 
-/* Subtle 3D button styling */
-button {
-  background-color: #A8A8A8; /* Gray button color */
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  transform: translateZ(0);
-}
+    h1 {
+      color: white;
+      font-size: 3rem;
+      text-align: center;
+      text-transform: uppercase;
+      text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.6);
+      animation: fadeIn 1s ease-out;
+      animation-delay: 0.3s;
+    }
 
-button:hover {
-  background-color: #888888; /* Slightly darker gray on hover */
-  transform: translateY(-3px) translateZ(10px); /* Lift effect */
-}
+    p {
+      color: #a8a8a8;
+      font-size: 1.1rem;
+      margin-top: 20px;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
 
-/* Flex container to align "Updates" and "Cómo intentamos hacerlo" */
-.flex-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  margin-top: 30px;
-}
+    button {
+      background-color: #a8a8a8;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      transform: translateZ(0);
+    }
 
-/* Updates Section (on the left) */
-.updates-section {
-  flex: 1;
-  margin-right: 20px; /* Space between the updates and the other content */
-  background-color: #333;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-}
+    button:hover {
+      background-color: #888888;
+      transform: translateY(-3px) translateZ(10px);
+    }
 
-/* "Cómo intentamos hacerlo" content */
-.como-intentamos {
-  flex: 2;
-}
+    .flex-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-top: 30px;
+    }
 
-/* Adding extra margin for sections within "Cómo intentamos hacerlo" */
-.como-intentamos .section {
-  margin-bottom: 25px;
-}
+    .updates-section {
+      flex: 1;
+      margin-right: 20px;
+      background-color: #333;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    }
 
-/* Fade-in animation for text */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
+    .como-intentamos {
+      flex: 2;
+    }
 
-/* Social Media Section */
-.social-media-container {
-  text-align: center;
-  margin-top: 50px;
-}
+    .como-intentamos .section {
+      margin-bottom: 25px;
+    }
 
-.social-media-container h2 {
-  color: white;
-  font-size: 2rem;
-  margin-bottom: 20px;
-}
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
 
-.social-media-icons {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-}
+    .social-media-container {
+      text-align: center;
+      margin-top: 50px;
+    }
 
-.social-icon {
-  width: 40px;
-  height: 40px;
-  transition: transform 0.3s ease;
-}
+    .social-media-container h2 {
+      color: white;
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
 
-.social-icon:hover {
-  transform: scale(1.1);
-}
+    .social-media-icons {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
 
-/* Optional: Add padding to bottom */
-body {
-  padding-bottom: 60px; /* Ensure there's space for the icons */
-}
+    .social-icon {
+      width: 40px;
+      height: 40px;
+      transition: transform 0.3s ease;
+    }
+
+    .social-icon:hover {
+      transform: scale(1.1);
+    }
+
+    body {
+      padding-bottom: 60px;
+    }
+
+    /* Estilos de Eventos */
+    .event-item {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 20px;
+    }
+
+    .event-details {
+      flex: 1;
+    }
+
+    .event-details h2 {
+      font-size: 2.0em;
+      margin-top: 0;
+      font-weight: bold;
+    }
+
+    .event-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      width: 100%;
+    }
+
+    .event-location-time {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+    }
+
+    .event-date,
+    .event-location,
+    .event-time {
+      margin: 0;
+    }
+
+    .event-container {
+      border: 1px solid #444;
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 20px;
+      background-color: #333;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    }
